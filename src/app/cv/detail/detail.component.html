@@ -1,0 +1,12 @@
+<div *ngIf="cv; else noCvSelected">
+    <img [src]="cv.path" alt="{{ cv.firstname }}" />
+    <h2>{{ cv.firstname }} {{ cv.name }}</h2>
+    <p>Age: {{ cv.age }}</p>
+    <p>CIN: {{ cv.cin }}</p>
+    <p>Job: {{ cv.job }}</p>
+  </div>
+  
+  <ng-template #noCvSelected>
+    <p>Sélectionnez un CV pour voir les détails.</p>
+  </ng-template>
+  

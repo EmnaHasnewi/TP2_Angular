@@ -1,0 +1,30 @@
+.cv-container {
+    display: flex;
+    justify-content: space-between;
+  }
+ 
+  .cv-list {
+    width: 40%;
+    border-right: 1px solid #ccc;
+    padding: 10px;
+  }
+  
+  .cv-detail {
+    width: 60%;
+    padding: 10px;
+  }
+ 
+  .cv-search {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center; /* Centrer horizontalement */
+  }
+  
+  .cv-search input {
+    width: 50%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  

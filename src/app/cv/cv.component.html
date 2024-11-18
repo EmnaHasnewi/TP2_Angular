@@ -1,0 +1,20 @@
+<app-header></app-header>
+<div class="cv-search">
+    <input
+      type="text"
+      placeholder="Rechercher un CV..."
+      [(ngModel)]="searchTerm"
+      (input)="filterCvs()"
+    />
+  </div>
+<div class="cv-container">
+  
+
+  <div class="cv-list">
+    <app-liste [cvs]="filteredCvs" (cvSelected)="selectCv($event)"></app-liste>
+  </div>
+
+  <div class="cv-detail">
+    <app-detail [cv]="selectedCv"></app-detail>
+  </div>
+</div>
