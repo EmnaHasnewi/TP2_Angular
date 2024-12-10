@@ -1,0 +1,7 @@
+<h2>Liste d'embauche</h2>
+  <div *ngFor="let cv of embauches">
+    <app-item [cv]="cv" ></app-item>
+  </div>
+  <ng-template #noCvs>
+    <p>Aucun embauche.</p>
+  </ng-template>

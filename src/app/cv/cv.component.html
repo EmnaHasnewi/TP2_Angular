@@ -1,4 +1,3 @@
-<app-header></app-header>
 <div class="cv-search">
     <input
       type="text"
@@ -6,15 +5,14 @@
       [(ngModel)]="searchTerm"
       (input)="filterCvs()"
     />
-  </div>
+</div>
 <div class="cv-container">
-  
-
   <div class="cv-list">
     <app-liste [cvs]="filteredCvs" (cvSelected)="selectCv($event)"></app-liste>
   </div>
 
   <div class="cv-detail">
-    <app-detail [cv]="selectedCv"></app-detail>
+    <app-detail [cv]="selectedCv" (embauche)="selectedCv && selectedCv.id !== undefined && embaucher(selectedCv.id)"></app-detail>
   </div>
 </div>
+<app-liste-embauches [embauches]="embauches" ></app-liste-embauches>

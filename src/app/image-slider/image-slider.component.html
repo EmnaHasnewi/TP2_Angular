@@ -1,0 +1,6 @@
+<div
+  class="image-container"
+  [ngStyle]="{ width: imageSize.width, height: imageSize.height }"
+>
+  <img *ngIf="currentImage$ | async as currentImage" [src]="currentImage" [alt]="currentImage" />
+</div>

@@ -1,12 +1,81 @@
-<div *ngIf="cv; else noCvSelected">
-    <img [src]="cv.path" alt="{{ cv.firstname }}" />
-    <h2>{{ cv.firstname }} {{ cv.name }}</h2>
-    <p>Age: {{ cv.age }}</p>
-    <p>CIN: {{ cv.cin }}</p>
-    <p>Job: {{ cv.job }}</p>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link href="https://netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<div *ngIf="cv" class="card-container">
+  <div class="card">
+    <!-- Front Side -->
+    <div class="front">
+      <div class="cover">
+        <img alt="Card cover" src="assets/cover.webp" />
+      </div>
+      <div class="user">
+        <img class="img-circle" src="assets/default_image.png" alt="Profile" />
+      </div>
+      <div class="content">
+        <div class="main">
+          <h3 class="name">{{ cv.name }} {{ cv.firstname }}</h3>
+          <p class="profession">{{ cv.job }}</p>
+        </div>
+        <div class="footer">
+          <div class="rating">
+            <i class="fa fa-mail-forward"></i> Auto Rotation
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Back Side -->
+    <div class="back">
+      <div class="header">
+        <h5 class="motto">"To be or not to be, this is my awesome motto!"</h5>
+      </div>
+      <div class="content">
+        <div class="main">
+          <h4 class="text-center">Job Description</h4>
+          <p class="text-center">
+            html css php javascript angular
+          </p>
+          <div class="text-center">
+            <span class="keywords">
+              html css php javascript angular
+            </span>
+          </div>
+          <div class="stats-container">
+            <div class="stats">
+              <h4>400</h4>
+              <p>Followers</p>
+            </div>
+            <div class="stats">
+              <h4>550</h4>
+              <p>Following</p>
+            </div>
+            <div class="stats">
+              <h4>11</h4>
+              <p>Projects</p>
+            </div>
+          </div>
+          <div class="text-center">
+          <button class="btn btn-primary" (click)="onEmbaucher()">Embaucher</button>
+          <button class="btn btn-dark" [routerLink]="['/cv', cv.id]">Voir détails</button>
+        </div>
+        </div>
+      </div>
+      <div class="footer">
+        <div class="social-links text-center">
+          <a [href]="cv?.socialLinks?.facebook" class="facebook">
+            <i class="fa fa-facebook fa-fw"></i>
+          </a>
+          <a [href]="cv?.socialLinks?.google" class="google">
+            <i class="fa fa-google-plus fa-fw"></i>
+          </a>
+          <a [href]="cv?.socialLinks?.twitter" class="twitter">
+            <i class="fa fa-twitter fa-fw"></i>
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
-  
-  <ng-template #noCvSelected>
-    <p>Sélectionnez un CV pour voir les détails.</p>
-  </ng-template>
-  
+</div>
+
+<ng-template #noCvSelected>
+  <p>Sélectionnez un CV pour voir les détails.</p>
+</ng-template>

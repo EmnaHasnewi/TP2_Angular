@@ -1,0 +1,22 @@
+<div class="detail-container">
+    <div class="cv-title" >
+        <h2>{{ cv?.firstname }}</h2>
+      </div>
+    <div class="cv-image">
+      <img src="assets/cv_ivon.png" alt="CV Icon" />
+    </div>
+  
+    <div class="cv-info">
+      <h3><i class="fas fa-info-circle"  ></i> Informations</h3>
+      <ul class="info-list">
+        <li><strong>Name:</strong> {{ cv?.name }}</li>
+        <li><strong>Firstname:</strong> {{ cv?.firstname }}</li>
+        <li><strong>Job:</strong> {{ cv?.job }}</li>
+        <li><strong>Age:</strong> {{ cv?.age }}</li>
+        <li><strong>CIN:</strong> {{ cv?.cin }}</li>
+      </ul>
+    </div>
+  
+    <button class="delete-btn" (click)="deleteCv()">Supprimer</button>
+  </div>
+  

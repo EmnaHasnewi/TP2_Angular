@@ -1,0 +1,35 @@
+<mat-card>
+  <mat-card-title>Login</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="authForm" (ngSubmit)="submit()">
+      
+      <!-- Conteneur Flex pour aligner les champs verticalement -->
+      <div fxLayout="column" fxLayoutGap="20px">
+        <!-- Email Field -->
+        <mat-form-field>
+          <input type="email" matInput placeholder="Email" formControlName="email">
+          <mat-error *ngIf="email?.hasError('required') && email?.touched">Email is required</mat-error>
+          <mat-error *ngIf="email?.hasError('email') && email?.touched">Invalid email address</mat-error>
+        </mat-form-field>
+
+        <!-- Password Field -->
+        <mat-form-field>
+          <input type="password" matInput placeholder="Password" formControlName="password">
+          <mat-error *ngIf="password?.hasError('required') && password?.touched">Password is required</mat-error>
+          <mat-error *ngIf="password?.hasError('minlength') && password?.touched">Password must be at least 4 characters long</mat-error>
+        </mat-form-field>
+
+        <!-- Error message (if exists) -->
+        <p *ngIf="error" class="error">
+          {{ error }}
+        </p>
+
+        <!-- Submit Button -->
+        <div class="button">
+          <button type="submit" mat-button [disabled]="authForm.invalid">Envoyer</button>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
+

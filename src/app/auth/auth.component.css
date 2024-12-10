@@ -1,0 +1,43 @@
+
+
+  :host {
+    
+    display: flex;
+    justify-content: center;
+    margin: 100px 0;
+  }
+  
+  .mat-form-field {
+    width: 100%;
+    min-width: 300px;
+  }
+
+  mat-card-title,
+  mat-card-content {
+    display: flex;
+    justify-content: center;
+  }
+
+  
+ .error {
+    padding: 16px;
+    width: 300px;
+    color: white;
+    background-color: red;
+    margin-top: 10px;
+  }
+  
+  .button {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  /* Error styling for invalid fields */
+  .mat-form-field.mat-form-field-invalid .mat-input-element {
+    border-color: red;
+  }
+  
+  .mat-form-field.mat-form-field-invalid .mat-form-field-label {
+    color: red;
+  }
+  

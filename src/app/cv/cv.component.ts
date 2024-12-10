@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { Cv, CvService } from '../services/cv.service';
+import { ToastrService } from 'ngx-toastr';
+import { EmbaucheService } from '../services/embauche.service';
 
 @Component({
   selector: 'app-cv',
@@ -6,71 +9,54 @@ import { Component } from '@angular/core';
   styleUrls: ['./cv.component.css']
 })
 export class CvComponent {
-  selectedCv: any = null;
+  //selectedCv: any = null;
   searchTerm: string = '';
+  cvs: Cv[] = [];
+  filteredCvs: Cv[] = [];
+  embauches: Cv[] = [];
+  selectedCv: Cv | null = null; // Holds the selected CV
 
-  cvs = [
-    {
-      id: 1,
-      name: 'hasnaoui',
-      firstname: 'emna',
-      age: 23,
-      cin: '12345678',
-      job: 'data scientist',
-      path: 'assets/confident-young-caucasian-woman-gestures-ok-hand-sign.jpg'
-    },
-    {
-      id: 2,
-      name: 'guesmi',
-      firstname: 'chaima',
-      age: 23,
-      cin: '87654321',
-      job: 'CEO',
-      path: 'assets/smiling-young-beautiful-girl-gesturing-hi-with-copy-space.jpg'
-    }  ,
-     {
-      id: 2,
-      name: 'ben meftah',
-      firstname: 'shams',
-      age: 23,
-      cin: '87654321',
-      job: 'AI engineer',
-      path: 'assets/sourire-d-un-air-affecté-blond-621210.webp'
-    },
-    {
-      id: 2,
-      name: 'bel hadj fraj',
-      firstname: 'nour',
-      age: 23,
-      cin: '87654321',
-      job: 'full stack developer',
-      path: 'assets/smiling-young-beautiful-girl-with-copy-space.jpg'
-    },   {
-      id: 2,
-      name: 'aloui',
-      firstname: 'ghofrane',
-      age: 23,
-      cin: '87654321',
-      job: 'cloud engineer',
-      path: 'assets/sourire-aux-dents-jeune-employée-de-banque-féminine-bureau-isolée-sur-fond-gris-255396704 (1).webp'
-    },
-    {
-      id: 2,
-      name: 'jarboui',
-      firstname: 'nada',
-      age: 23,
-      cin: '87654321',
-      job: 'data analyst',
-      path: 'assets/sourire-aux-dents-jeune-employée-de-banque-féminine-bureau-isolée-sur-fond-gris-255396704.webp'
-    }
-  ];
+  constructor(
+    private cvService: CvService,
+    private embaucheService: EmbaucheService, 
+    private toastr: ToastrService,
 
-  filteredCvs = [...this.cvs];
+  ) {}
 
-  selectCv(cv: any) {
-    this.selectedCv = cv;
+  ngOnInit(): void {
+    // Charger les CV
+    this.cvService.cvList$.subscribe(data => {
+      this.cvs = data;
+    this.filteredCvs = [...this.cvs]; // Initialize filteredCvs
+    console.log('CVs chargés :', this.cvs);
+    });
+
+    // Souscrire à la sélection
+    this.cvService.selectedCv$.subscribe((cv) => {
+      this.selectedCv = cv;
+    });
+  }
+  embaucher(id: number): void {
+    const cv = this.cvs.find(c => c.id === id);
+    if (cv) {
+      if (cv.isEmbauche) {
+      } else {
+        //this.filteredCvs = this.filteredCvs.map(c => (c.id === id ? cv : c)); // Update filtered list
+        this.embaucheService.embaucherCv(id); // Notify the service
+        this.updateEmbauches(); // Refresh embauches list
+      }
+    }}
+  
+
+  updateEmbauches(): void {
+    this.embaucheService.getEmbauches().subscribe((embauches) => {
+    this.embauches = embauches; // Update the embauches list
+    });
   }
 
+  selectCv(cv: Cv): void {
+    this.selectedCv = cv;  }
+  // Filter CVs based on the search term
   filterCvs() {
     this.filteredCvs = this.cvs.filter(cv =>
       `${cv.firstname} ${cv.name}`.toLowerCase().includes(this.searchTerm.toLowerCase())
